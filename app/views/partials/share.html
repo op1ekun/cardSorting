@@ -1,0 +1,22 @@
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">Share "{{session.name}}" session with users</h3>
+    </div>
+    <div class="modal-body">
+        <h4>Enter email addresses of the users that you want to share your session with</h4>
+
+        <label>user's email <input type="text" class="form-control" ng-model="session.newEmail"
+                                   ng-keypress="addEmailOnEnter($event)"/></label>
+        <button class="btn btn-primary" ng-click="addEmail()"><i class="glyphicon glyphicon-plus-sign"></i> Add</button>
+        <h5>This session will be shared with following {{session.emails.length}} users:</h5>
+
+        <ul ng-repeat="(index, email) in session.emails">
+            <li><label>user's email {{index+1}} <input type="text" class="form-control" readonly="readonly" value="{{email}}" name="existingEmail"/></label></li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <!-- disable the share button until there is at least one to share with -->
+        <button class="btn btn-primary" ng-click="share()" ng-disabled="session.emails.length < 1">Share</button>
+        <button class="btn" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

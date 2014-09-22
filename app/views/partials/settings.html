@@ -1,0 +1,50 @@
+<div ng-include="'partials/navbar.html'"></div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Change Password</h1>
+  </div>
+  <div class="col-sm-12">
+    <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+
+      <div class="form-group">
+        <!-- REVIEW: label should surround input, so it targets it correctly when clicked -->
+        <label>Current Password
+
+          <input type="password" name="password" class="form-control" ng-model="user.oldPassword" mongoose-error/>
+        </label>
+
+        <p class="help-block" ng-show="form.password.$error.mongoose">
+          {{ errors.other }}
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>New Password
+
+          <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword" ng-minlength="3"
+                 required/>
+        </label>
+
+        <p class="help-block" ng-show="newPasswordInvalid()">
+          Password must be at least 3 characters.
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>Confirm New Password
+
+          <input type="password" name="confirmNewPassword" class="form-control" ng-model="user.confirmNewPassword" required/>
+        </label>
+
+        <p class="help-block" ng-show="confirmNewPasswordInvalid()">
+          Password must match new password.
+        </p>
+      </div>
+
+      <p class="help-block"> {{ message }} </p>
+
+      <button class="btn btn-lg btn-primary" type="submit" ng-disabled="disableSave()">Save changes</button>
+    </form>
+  </div>
+</div>

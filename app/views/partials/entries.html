@@ -1,0 +1,34 @@
+<div ng-include="'partials/navbar'"></div>
+<form class="create_session form" name="form" ng-submit="createEntry(form)">
+<!--     <button type="button" ng-hide="activeMode" class="btn btn-primary create_session_control" ng-click="switchMode()">Create entry</button>
+
+    <button type="reset" ng-show="activeMode" href="" ng-click="switchMode()" class="btn create_session_control">Cancel</button>
+    <button type="submit" ng-show="activeMode" class="btn btn-primary create_session_control">Save</button> -->
+
+    <div ng-show="activeMode" class="animate-show">
+        <label class="create_session_label">Name <input type="text" name="name" class="create_session_field" mongoose-error ng-model="cardentry.name" /></label>
+        <label class="create_session_label">Categories <input type="text" name="categories" class="create_session_field" mongoose-error ng-model="cardentry.categories" /></label>
+        <label class="create_session_label">Items <input type="text" name="items" class="create_session_field" mongoose-error ng-model="cardentry.items" /></label>
+    </div>
+</form>
+<h2>{{session.name}} entries</h2>
+
+<ul ng-repeat="entry in session.entries" class="list-group sessions_list">
+    <li class="list-group-item">
+        <h3>{{entry.participant.email}}</h3>
+        <p>{{entry.timestamp}}</p>
+        <h4>Categories</h4>
+        <ul ng-repeat="(name, category) in entry.entry">
+            <li>
+                <h4>{{name}}</h4>
+
+                <h4>Items</h4>
+                <ul ng-repeat="item in category">
+                    <li>
+                        <h4>{{item}}</h4>
+                    </li>
+                </ul>        
+            </li>
+        </ul>
+    </li>
+</ul>

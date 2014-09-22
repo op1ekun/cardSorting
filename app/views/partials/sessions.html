@@ -1,0 +1,36 @@
+<div ng-include="'partials/navbar'"></div>
+<form class="create_session form" name="form" ng-submit="createCardSession(form)">
+    <button type="button" ng-hide="activeMode" class="btn btn-primary create_session_control" ng-click="switchMode()">Create session</button>
+
+    <button type="reset" ng-show="activeMode" href="" ng-click="switchMode()" class="btn create_session_control">Cancel</button>
+    <button type="submit" ng-show="activeMode" class="btn btn-primary create_session_control">Save</button>
+
+    <div ng-show="activeMode" class="animate-show">
+        <label class="create_session_label">Name <input type="text" name="name" class="create_session_field" mongoose-error ng-model="cardSession.name" /></label>
+        <label class="create_session_label">Categories <input type="text" name="categories" class="create_session_field" mongoose-error ng-model="cardSession.categories" /></label>
+        <label class="create_session_label">Items <input type="text" name="items" class="create_session_field" mongoose-error ng-model="cardSession.items" /></label>
+    </div>
+</form>
+
+<ul ng-repeat="session in sessions" class="list-group sessions_list">
+    <li class="list-group-item">
+        <h2>{{session.name}}</h2>
+        <a href="" class="share_link" ng-click="shareSession(session._id, session.name)">Share</a>
+        <p>{{session.timestamp | date: 'medium'}}</p>
+
+        <h3>Categories</h3>
+        <ul ng-repeat="category in session.categories">
+            <li>
+                <h4>{{category}}</h4>
+            </li>
+        </ul>
+
+        <h3>Items</h3>
+        <ul ng-repeat="item in session.items">
+            <li>
+                <h4>{{item}}</h4>
+            </li>
+        </ul>
+        <a href="/sessions/{{session._id}}/entries" class="">Entries</a>
+    </li>
+</ul>
